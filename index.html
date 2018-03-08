@@ -1,0 +1,36 @@
+<html>
+<head>
+  <title>Pulse Plotter</title>
+  <script src="./jquery.js"></script>
+  <script src="./main.js"></script>
+  <style>
+    #input {
+      width: 250px;
+      height: 500px;
+    }
+
+    #chart {
+      border: 1px solid #777;
+    }
+    #norm, #dev, #steps {
+      width: 50px;
+    }
+  </style>
+</head>
+<body>
+  <center>
+    Normal: <input id="norm" value="70"/>
+    &nbsp;
+    dev(%): <input id="dev" value="7"/>
+    &nbsp;
+    Steps: <input id="steps" value="3"/>
+    <br/>
+    <button id="plot">Plot</button>
+    <hr/>
+    <textarea id="input"></textarea>
+    <canvas id="chart" width="700" height="500"></canvas>
+    <br/>
+    <input id="coords" disabled="true"/>
+  </center>
+</body>
+</html>
