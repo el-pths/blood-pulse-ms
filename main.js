@@ -41,20 +41,43 @@ function extractGood(pts) {
   return res;
 }
 
+function drawGrid(ctx, w, h, kh) {
+    ctx.lineWidth = 1;
+    for (var i = 1; i < 8; i++) {
+        var y = Math.round(i * h / 8);
+        ctx.strokeStyle = i % 2 ? '#A0FFD0' : '#80C0FF';
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(w, y);
+        ctx.stroke();
+    }
+    for (var j = 1; true; j++) {
+        var x = Math.round(j * 5 * kh);
+        if (x > w) {
+            break;
+        }
+        ctx.strokeStyle = j % 2 ? '#A0FFD0' : '#80C0FF';
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, h);
+        ctx.stroke();
+    }
+}
+
 function draw(data, norm) {
   var ctx = $('#chart').get(0).getContext("2d");
   var w = $('#chart').width();
   var h = $('#chart').height();
-  ctx.clearRect(0, 0, w, h);
-  ctx.strokeStyle = '#ff0000';
-  ctx.lineWidth = 2;
   var top = 0;
   for (var i in data) {
     top = Math.max(top, data[i][1]);
   }
   kh = w / data[data.length - 1][0];
   kv = h / (top - norm);
-  console.log('drawing');
+  ctx.clearRect(0, 0, w, h);
+  drawGrid(ctx, w, h, kh);
+  ctx.strokeStyle = '#ff0000';
+  ctx.lineWidth = 2;
   for (var j in data) {
     var x = Math.round(data[j][0] * kh);
     var y = h - Math.round((data[j][1] - norm) * kv);
@@ -65,7 +88,6 @@ function draw(data, norm) {
     ctx.lineTo(x, y + 5);
     ctx.lineTo(x - 5, y);
     ctx.stroke();
-    console.log(x + ' ' + y);
   }
 }
 
