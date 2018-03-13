@@ -5,7 +5,7 @@ var norm = 70;
 var kh = 0, kv = 0;
 
 function parsePoints() {
-  var s = $('#input').val().split(/\n/);
+  var s = $('#input').val().trim().split(/\n/);
   for (var i = 0; i < s.length; i++) {
     s[i] = parseFloat(s[i].replace(/\s.*/, ''));
   }
